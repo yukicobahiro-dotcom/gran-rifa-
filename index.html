@@ -33,7 +33,7 @@
 
     #card {
         width: 450px;
-        background-image: url("https://github.com/yukicobahiro-dotcom/gran-rifa-/blob/main/fondo.jpeg?raw=true");
+        background-image: url("https://raw.githubusercontent.com/yukicobahiro-dotcom/gran-rifa-/main/fondo.jpeg");
         background-size: cover;
         background-position: center;
         padding: 20px;
@@ -212,48 +212,51 @@ for (let i = 0; i < 100; i++) {
 /* DESCARGA 1080x1920 */
 document.getElementById("downloadBtn").onclick = async () => {
     const original = document.getElementById("card");
-
     const clone = original.cloneNode(true);
 
-    // URL raw de GitHub
-    clone.style.backgroundImage = 'url("https://github.com/yukicobahiro-dotcom/gran-rifa-/blob/main/fondo.jpeg?raw=true")';
-    clone.style.backgroundSize = 'cover';
-    clone.style.backgroundPosition = 'center';
-    clone.style.width = "500px";
-    clone.style.position = "absolute";
-    clone.style.left = "-9999px";
+    // Imagen de GitHub con CORS
+    const img = new Image();
+    img.crossOrigin = "anonymous";
+    img.src = "https://raw.githubusercontent.com/yukicobahiro-dotcom/gran-rifa-/main/fondo.jpeg";
 
-    document.body.appendChild(clone);
+    img.onload = async () => {
+        clone.style.backgroundImage = `url(${img.src})`;
+        clone.style.backgroundSize = 'cover';
+        clone.style.backgroundPosition = 'center';
+        clone.style.width = "500px";
+        clone.style.position = "absolute";
+        clone.style.left = "-9999px";
 
-    // Esperar para que carguen fuentes y estilos
-    await new Promise(r => setTimeout(r, 500));
+        document.body.appendChild(clone);
+        await new Promise(r => setTimeout(r, 500));
 
-    const render = await html2canvas(clone, {
-        backgroundColor: null,
-        useCORS: true,
-        scale: 3
-    });
+        const render = await html2canvas(clone, {
+            backgroundColor: null,
+            useCORS: true,
+            scale: 3
+        });
 
-    document.body.removeChild(clone);
+        document.body.removeChild(clone);
 
-    const final = document.createElement("canvas");
-    final.width = 1080;
-    final.height = 1920;
-    const ctx = final.getContext("2d");
+        const final = document.createElement("canvas");
+        final.width = 1080;
+        final.height = 1920;
+        const ctx = final.getContext("2d");
 
-    ctx.fillStyle = "#ffffff";
-    ctx.fillRect(0, 0, final.width, final.height);
+        ctx.fillStyle = "#ffffff";
+        ctx.fillRect(0, 0, final.width, final.height);
 
-    const scale = final.height / render.height;
-    const newW = render.width * scale;
-    const x = (1080 - newW) / 2;
+        const scale = final.height / render.height;
+        const newW = render.width * scale;
+        const x = (1080 - newW) / 2;
 
-    ctx.drawImage(render, x, 0, newW, 1920);
+        ctx.drawImage(render, x, 0, newW, 1920);
 
-    const a = document.createElement("a");
-    a.download = "rifa_1080x1920.png";
-    a.href = final.toDataURL("image/png");
-    a.click();
+        const a = document.createElement("a");
+        a.download = "rifa_1080x1920.png";
+        a.href = final.toDataURL("image/png");
+        a.click();
+    };
 };
 
 /* LIMPIAR */
