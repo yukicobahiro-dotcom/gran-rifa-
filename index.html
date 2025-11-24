@@ -33,7 +33,7 @@
 
     #card {
         width: 450px;
-        background-image: url("data:image/jpeg;base64,[AQUÍ_TU_BASE64]");
+        background-image: url("https://github.com/yukicobahiro-dotcom/gran-rifa-/blob/main/fondo.jpeg?raw=true");
         background-size: cover;
         background-position: center;
         padding: 20px;
@@ -54,7 +54,7 @@
         font-family: "Lobster", cursive;
     }
 
-    /* Fuente nueva para subtítulos y textos secundarios */
+    /* Fuente para subtítulos y otros textos secundarios */
     .sub, .boyaca, .precio, .nequi-box, #pie {
         font-family: "Poppins", sans-serif;
     }
@@ -215,8 +215,8 @@ document.getElementById("downloadBtn").onclick = async () => {
 
     const clone = original.cloneNode(true);
 
-    // Imagen de fondo en Base64 para evitar CORS
-    clone.style.backgroundImage = 'url("data:image/jpeg;base64,[AQUÍ_TU_BASE64]")';
+    // URL raw de GitHub
+    clone.style.backgroundImage = 'url("https://github.com/yukicobahiro-dotcom/gran-rifa-/blob/main/fondo.jpeg?raw=true")';
     clone.style.backgroundSize = 'cover';
     clone.style.backgroundPosition = 'center';
     clone.style.width = "500px";
@@ -265,8 +265,6 @@ document.getElementById("clearBtn").onclick = () => {
 
 </body>
 </html>
-
-
 
 
 
