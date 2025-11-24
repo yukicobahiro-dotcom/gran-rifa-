@@ -18,12 +18,12 @@
         display: flex;
         justify-content: center;
         align-items: flex-start;
-        overflow-x: hidden; /* 🔥 EVITA EL DESPLAZAMIENTO LATERAL */
+        overflow-x: hidden;
     }
 
     #wrapper {
         width: 100%;
-        max-width: 480px; /* 🔥 CENTRADO REAL Y ESTABLE */
+        max-width: 480px;
         margin: 0 auto;
         padding: 20px 0;
         display: flex;
@@ -52,6 +52,11 @@
         text-shadow: 3px 3px 8px #000;
         margin-bottom: 5px;
         font-family: "Lobster", cursive;
+    }
+
+    /* Fuente nueva para subtítulos y textos secundarios */
+    .sub, .boyaca, .precio, .nequi-box, #pie {
+        font-family: "Poppins", sans-serif;
     }
 
     .sub {
@@ -173,7 +178,7 @@
 
         <div id="numeros" class="grid"></div>
 
-        <div id="pie"> juega con las dos ultimas cifras</div>
+        <div id="pie">juega con las dos ultimas cifras</div>
     </div>
 
     <div class="botones">
@@ -210,12 +215,16 @@ document.getElementById("downloadBtn").onclick = async () => {
 
     const clone = original.cloneNode(true);
     clone.style.backgroundImage = 'url("https://i.imgur.com/mf3QMKb.jpeg")';
+    clone.style.backgroundSize = 'cover';
+    clone.style.backgroundPosition = 'center';
     clone.style.width = "500px";
     clone.style.position = "absolute";
     clone.style.left = "-9999px";
 
     document.body.appendChild(clone);
-    await new Promise(r => setTimeout(r, 80));
+
+    // Esperar más tiempo para que carguen fuentes y colores
+    await new Promise(r => setTimeout(r, 500));
 
     const render = await html2canvas(clone, {
         backgroundColor: null,
@@ -254,6 +263,8 @@ document.getElementById("clearBtn").onclick = () => {
 
 </body>
 </html>
+
+
 
 
 
